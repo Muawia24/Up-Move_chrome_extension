@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workout Reminder Options</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <div class="header">
+    <h1>⚙️ Workout Reminder Options</h1>
+    <p>Customize your workout reminders</p>
+  </div>
+  
+  <div class="content">
+    <div class="settings-section">
+      <div class="section-title">Reminder Settings</div>
+      <div class="input-group">
+        <label class="input-label" for="interval">Remind me every (minutes)</label>
+        <input type="number" id="interval" class="input-field" value="60" min="5" max="480">
+      </div>
+      <div class="sound-toggle">
+        <span class="sound-label">🔊 Sound notifications</span>
+        <div class="mini-toggle" id="soundToggle">
+          <div class="mini-toggle-slider"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="settings-section">
+      <div class="section-title">Custom Workouts</div>
+      <div class="input-group">
+        <input type="text" id="customWorkout" class="input-field" placeholder="Add your own workout...">
+      </div>
+      <button class="button" id="addWorkout">Add Workout</button>
+      <div class="workout-list" id="workoutList"></div>
+    </div>
+    
+    <button class="button primary" id="saveOptions">Save Options</button>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

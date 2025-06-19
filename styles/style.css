@@ -1,0 +1,332 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    width: 350px;
+    min-height: 500px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+  
+  body.dark-mode {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  }
+  
+  .header {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+  
+  .header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  .header p {
+    font-size: 12px;
+    opacity: 0.8;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .toggle-section,
+  .settings-section,
+  .stats-section {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+  }
+  
+  .toggle-container,
+  .sound-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .toggle-label,
+  .sound-label {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .toggle {
+    position: relative;
+    width: 50px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .toggle.active {
+    background: #4CAF50;
+  }
+  
+  .toggle-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 21px;
+    height: 21px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .toggle.active .toggle-slider {
+    transform: translateX(25px);
+  }
+  
+  .mini-toggle {
+    width: 35px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .mini-toggle.active {
+    background: #4CAF50;
+  }
+  
+  .mini-toggle-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .mini-toggle.active .mini-toggle-slider {
+    transform: translateX(17px);
+  }
+  
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+    opacity: 0.9;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 14px;
+    backdrop-filter: blur(10px);
+  }
+  
+  .input-field::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .input-field:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  
+  .stat-item {
+    text-align: center;
+  }
+  
+  .stat-number {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  
+  .stat-label {
+    font-size: 11px;
+    opacity: 0.8;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+  
+  .button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+  }
+  
+  .button.primary {
+    background: #4CAF50;
+  }
+  
+  .button.primary:hover {
+    background: #45a049;
+  }
+  
+  .workout-list {
+    max-height: 120px;
+    overflow-y: auto;
+    margin-top: 10px;
+  }
+  
+  .workout-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .remove-workout {
+    background: none;
+    border: none;
+    color: #ff6b6b;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .dark-mode-toggle {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 20px;
+    padding: 8px;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .dark-mode-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+  
+  .streak-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff6b6b;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+  
+  .achievement-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: rgba(76, 175, 80, 0.95);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+  
+  .achievement-popup.show {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  .achievement-popup h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  .achievement-popup p {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+  
+  .progress-ring {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 10px;
+  }
+  
+  .progress-ring-circle {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.3);
+    stroke-width: 4;
+  }
+  
+  .progress-ring-progress {
+    fill: none;
+    stroke: #4CAF50;
+    stroke-width: 4;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    transition: stroke-dasharray 0.3s ease;
+  }
+  
+  .weekly-goal {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .weekly-goal-label {
+    font-size: 11px;
+    opacity: 0.8;
+    margin-bottom: 5px;
+  }
