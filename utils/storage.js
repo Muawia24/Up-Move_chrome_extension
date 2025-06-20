@@ -1,4 +1,4 @@
-class WorkoutStorage {
+export default class WorkoutStorage {
   static async get(keys) {
     return new Promise((resolve) => {
       chrome.storage.sync.get(keys, resolve);
@@ -14,7 +14,7 @@ class WorkoutStorage {
   static async getSettings() {
     const defaults = {
       enabled: true,
-      interval: 60,
+      interval: 5,
       customWorkouts: [],
       streak: 0,
       completedWorkouts: 0,
@@ -25,6 +25,16 @@ class WorkoutStorage {
     
     const stored = await this.get(Object.keys(defaults));
     return { ...defaults, ...stored };
+  }
+
+  static async getWorkouts() {
+    const settings = await this.getSettings();
+    return settings.customWorkouts || [];
+  }
+
+  static async getStats() {
+    const settings = await this.getSettings();
+    return settings
   }
 
   static async updateStats(completed = false) {

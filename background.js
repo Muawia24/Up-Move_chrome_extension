@@ -1,4 +1,4 @@
-import { getSettings, updateSettings, getStats, updateStats, getWorkouts } from './utils/storage.js';
+import WorkoutStorage from './utils/storage.js';
 
 // Default workout suggestions
 const defaultWorkouts = [
@@ -11,10 +11,10 @@ const defaultWorkouts = [
 
 // Function to show notification
 async function showWorkoutNotification() {
-  const settings = await getSettings();
+  const settings = await WorkoutStorage.getSettings();
   if (!settings.enabled) return; // Don't show notification if reminders are disabled
 
-  const allWorkouts = [...defaultWorkouts, ...(await getWorkouts())];
+  const allWorkouts = [...defaultWorkouts, ...(await WorkoutStorage.getWorkouts())];
   const randomWorkout = allWorkouts[Math.floor(Math.random() * allWorkouts.length)];
 
   chrome.notifications.create(
@@ -45,7 +45,7 @@ async function showWorkoutNotification() {
 chrome.notifications.onButtonClicked.addListener(async (notificationId, buttonIndex) => {
   if (notificationId === "workoutReminder") {
     if (buttonIndex === 0) { // Done button
-      const stats = await getStats();
+      const stats = await WorkoutStorage.getSettings();
       const today = new Date().toDateString();
 
       // Update completed workouts
@@ -68,7 +68,7 @@ chrome.notifications.onButtonClicked.addListener(async (notificationId, buttonIn
         stats.streak = 1; // First workout
       }
       stats.lastWorkoutDate = today;
-      updateStats(stats);
+      WorkoutStorage.updateStats(stats);
 
       chrome.notifications.clear("workoutReminder");
     } else if (buttonIndex === 1) { // Remind me later button
@@ -89,7 +89,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 // Set up initial alarm when extension is installed or updated
 chrome.runtime.onInstalled.addListener(async () => {
-  const settings = await getSettings();
+  const settings = await WorkoutStorage.getSettings();
   if (settings.enabled !== false) { // If not explicitly disabled
     const interval = settings.interval || 60; // Default to 60 minutes
     chrome.alarms.create("workoutReminder", {
@@ -102,9 +102,9 @@ chrome.runtime.onInstalled.addListener(async () => {
 // Listen for messages from popup.js to toggle reminders
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
   if (request.action === "toggleReminders") {
-    const settings = await getSettings();
+    const settings = await WorkoutStorage.getSettings();
     settings.enabled = request.enabled;
-    await updateSettings(settings);
+    await WorkoutStorage.updateSettings(settings);
 
     if (request.enabled) {
       const interval = settings.interval || 60;
@@ -118,4 +118,14 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     }
     sendResponse({ status: "reminders toggled" });
   }
+});
+
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.notifications.create({
+    type: 'basic',
+    iconUrl: 'icons/icon128.png',
+    title: 'Workout Reminder',
+    message: 'This is a test notification!',
+    priority: 2
+  });
 });
