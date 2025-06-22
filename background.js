@@ -35,13 +35,16 @@ async function showWorkoutNotification() {
   );
 
   // Play sound if enabled
-  if (settings.enabled) {
-    try{
-      const audio = new Audio("TunePocket-Synth-Fanfares-2-Preview.mp3"); // Assuming you have a notification sound file
-      audio.play();
-    } catch {
-      console.log("Unable to play audio!");
-    }
+  try {
+    chrome.tts.speak(randomWorkout, {
+      rate: 1.0,
+      pitch: 1.0,
+      volume: 1.0,
+      lang: "en-US",
+      enqueue: false
+    });
+  } catch (err) {
+    console.error("TTS error:", err);
   }
 }
 
@@ -101,6 +104,14 @@ chrome.runtime.onInstalled.addListener(async () => {
       periodInMinutes: interval,
     });
   }
+
+  chrome.notifications.create({
+    type: 'basic',
+    iconUrl: 'icons/icon128.png',
+    title: 'Workout Reminder',
+    message: 'Workout Reminder Extension Installed!',
+    priority: 2
+  });
 });
 
 // Listen for messages from popup.js to toggle reminders
@@ -120,16 +131,21 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     } else {
       chrome.alarms.clear("workoutReminder");
     }
+
     sendResponse({ status: "reminders toggled" });
   }
-});
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.notifications.create({
-    type: 'basic',
-    iconUrl: 'icons/icon128.png',
-    title: 'Workout Reminder',
-    message: 'This is a test notification!',
-    priority: 2
-  });
+  if (request.action === "resetAlarmWithNewInterval") {
+    const settings = await WorkoutStorage.getSettings();
+    const interval = settings.interval || 60;
+
+    chrome.alarms.clear("workoutReminder", () => {
+      chrome.alarms.create("workoutReminder", {
+        delayInMinutes: interval,
+        periodInMinutes: interval,
+      });
+    });
+
+    sendResponse({ status: "alarm reset" });
+  }
 });

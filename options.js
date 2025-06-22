@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
         interval: interval
       }, () => {
         // Show success feedback
+        chrome.runtime.sendMessage({ action: "resetAlarmWithNewInterval" });
         const originalText = saveOptionsButton.textContent;
         saveOptionsButton.textContent = "✅ Saved!";
         saveOptionsButton.style.background = "#4CAF50";

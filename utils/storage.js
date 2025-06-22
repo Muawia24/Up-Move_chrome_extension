@@ -27,6 +27,10 @@ export default class WorkoutStorage {
     return { ...defaults, ...stored };
   }
 
+  static async updateSettings(newSettings) {
+    await this.set(newSettings);
+  }
+
   static async getWorkouts() {
     const settings = await this.getSettings();
     return settings.customWorkouts || [];
