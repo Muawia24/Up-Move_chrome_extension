@@ -35,9 +35,13 @@ async function showWorkoutNotification() {
   );
 
   // Play sound if enabled
-  if (settings.soundEnabled) {
-    const audio = new Audio("notification.mp3"); // Assuming you have a notification sound file
-    audio.play();
+  if (settings.enabled) {
+    try{
+      const audio = new Audio("TunePocket-Synth-Fanfares-2-Preview.mp3"); // Assuming you have a notification sound file
+      audio.play();
+    } catch {
+      console.log("Unable to play audio!");
+    }
   }
 }
 
@@ -68,7 +72,7 @@ chrome.notifications.onButtonClicked.addListener(async (notificationId, buttonIn
         stats.streak = 1; // First workout
       }
       stats.lastWorkoutDate = today;
-      WorkoutStorage.updateStats(stats);
+      WorkoutStorage.updateStats(true);
 
       chrome.notifications.clear("workoutReminder");
     } else if (buttonIndex === 1) { // Remind me later button
