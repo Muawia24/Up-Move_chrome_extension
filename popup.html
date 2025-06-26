@@ -1,33 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Workout Reminder</title>
-  <meta charset="utf-8">
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <div class="header">
-    <button class="dark-mode-toggle" id="darkModeToggle">🌙</button>
-    <h1>💪 Workout Reminder</h1>
-    <p>Stay healthy and productive</p>
-  </div>
-  
-  <div class="content">
-    <div class="toggle-section">
-      <div class="toggle-container">
-        <span class="toggle-label">Enable Reminders</span>
-        <div class="toggle" id="enableToggle">
+  <div class="popup-container">
+    <!-- Header Section -->
+    <header class="popup-header">
+      <div class="header-content">
+        <div class="logo-section">
+          <div class="logo-icon">💪</div>
+          <div class="header-text">
+            <h1 class="app-title">Workout Reminder</h1>
+            <p class="app-subtitle">Stay active, stay healthy!</p>
+          </div>
+        </div>
+        <button class="theme-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Streak Display Section -->
+    <section class="streak-section">
+      <div class="streak-card">
+        <div class="streak-content">
+          <div class="streak-icon">🔥</div>
+          <div class="streak-info">
+            <span class="streak-label">Current Streak</span>
+            <span class="streak-count" id="streakCount">0 days</span>
+          </div>
+        </div>
+        <div class="streak-message" id="streakMessage">
+          Keep it up! You're doing great!
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls Section -->
+    <section class="controls-section">
+      <div class="control-item">
+        <div class="control-info">
+          <span class="control-label">Workout Reminders</span>
+          <span class="control-description">Get notified to stay active</span>
+        </div>
+        <div class="toggle-switch" id="enableToggle">
           <div class="toggle-slider"></div>
         </div>
       </div>
-    </div>
-    
-    <div class="settings-section">
-      <div class="section-title">Quick Actions</div>
-      <button class="button primary" id="openOptions">Open Settings</button>
-    </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number" id="completedWorkouts">0</span>
+          <span class="stat-label">Completed</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="totalReminders">0</span>
+          <span class="stat-label">Reminders</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="popup-footer">
+      <button class="options-button" id="openOptions">
+        <span class="button-icon">⚙️</span>
+        <span class="button-text">Settings</span>
+      </button>
+    </footer>
   </div>
 
-  <script src="popup.js"></script>
+  <script type="module" src="popup.js"></script>
 </body>
 </html>

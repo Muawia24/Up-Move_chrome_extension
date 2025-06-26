@@ -14,6 +14,7 @@ export default class WorkoutStorage {
   static async getSettings() {
     const defaults = {
       enabled: true,
+      soundEnabled: true,
       interval: 5,
       customWorkouts: [],
       streak: 0,

@@ -2,11 +2,13 @@ import WorkoutStorage from './utils/storage.js';
 
 // Default workout suggestions
 const defaultWorkouts = [
-  "Do 10 squats",
-  "Stretch your back",
+  "Wall sit for 30 seconds",
+  "Do 10 push-ups (wall, desk, or regular)",
   "Walk around for 5 minutes",
   "Do 15 jumping jacks",
-  "Touch your toes 10 times"
+  "Touch your toes 10 times",
+  "Cat-Cow stretch",
+  "March in place for 1 minute"
 ];
 
 // Function to show notification
@@ -35,16 +37,18 @@ async function showWorkoutNotification() {
   );
 
   // Play sound if enabled
-  try {
-    chrome.tts.speak(randomWorkout, {
+  if (settings.soundEnabled) {
+    try {
+      chrome.tts.speak(`Time to take a workout break!, ${randomWorkout}`, {
       rate: 1.0,
       pitch: 1.0,
       volume: 1.0,
       lang: "en-US",
       enqueue: false
-    });
-  } catch (err) {
-    console.error("TTS error:", err);
+      });
+    } catch (err) {
+      console.error("TTS error:", err);
+    }
   }
 }
 
@@ -94,26 +98,6 @@ chrome.alarms.onAlarm.addListener((alarm) => {
   }
 });
 
-// Set up initial alarm when extension is installed or updated
-chrome.runtime.onInstalled.addListener(async () => {
-  const settings = await WorkoutStorage.getSettings();
-  if (settings.enabled !== false) { // If not explicitly disabled
-    const interval = settings.interval || 60; // Default to 60 minutes
-    chrome.alarms.create("workoutReminder", {
-      delayInMinutes: interval,
-      periodInMinutes: interval,
-    });
-  }
-
-  chrome.notifications.create({
-    type: 'basic',
-    iconUrl: 'icons/icon128.png',
-    title: 'Workout Reminder',
-    message: 'Workout Reminder Extension Installed!',
-    priority: 2
-  });
-});
-
 // Listen for messages from popup.js to toggle reminders
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
   if (request.action === "toggleReminders") {
@@ -139,13 +123,12 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     const settings = await WorkoutStorage.getSettings();
     const interval = settings.interval || 60;
 
-    chrome.alarms.clear("workoutReminder", () => {
-      chrome.alarms.create("workoutReminder", {
+    chrome.alarms.clear("workoutReminder");
+    chrome.alarms.create("workoutReminder", {
         delayInMinutes: interval,
         periodInMinutes: interval,
-      });
     });
 
-    sendResponse({ status: "alarm reset" });
+    sendResponse({ status: "reminders toggled" });
   }
 });

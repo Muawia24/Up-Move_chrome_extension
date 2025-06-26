@@ -1,41 +1,186 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Workout Reminder Options</title>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout Reminder - Settings</title>
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <div class="header">
-    <h1>⚙️ Workout Reminder Options</h1>
-    <p>Customize your workout reminders</p>
-  </div>
-  
-  <div class="content">
-    <div class="settings-section">
-      <div class="section-title">Reminder Settings</div>
-      <div class="input-group">
-        <label class="input-label" for="interval">Remind me every (minutes)</label>
-        <input type="number" id="interval" class="input-field" value="60" min="5" max="480">
+  <div class="options-container">
+    <!-- Header -->
+    <header class="options-header">
+      <h1 class="options-title">⚙️ Workout Reminder Settings</h1>
+      <p class="options-subtitle">Customize your workout reminders and track your progress</p>
+    </header>
+
+    <!-- Settings Grid -->
+    <div class="settings-grid">
+      
+      <!-- Reminder Settings Card -->
+      <div class="settings-card">
+        <div class="card-header">
+          <span class="card-icon">⏰</span>
+          <h2 class="card-title">Reminder Settings</h2>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="interval">Reminder Interval (minutes)</label>
+          <div class="form-row">
+            <input 
+              type="number" 
+              id="interval" 
+              class="form-input" 
+              value="60" 
+              min="5" 
+              max="480"
+              placeholder="Enter minutes (5-480)"
+            >
+            <button class="btn btn-primary" id="saveOptions">
+              <span>💾</span>
+              Save
+            </button>
+          </div>
+          <small class="form-help">Set how often you want to be reminded (5-480 minutes)</small>
+        </div>
+
+        <div class="toggle-row">
+          <span class="toggle-label">🔊 Sound Notifications</span>
+          <div class="toggle-switch" id="soundToggle">
+            <div class="toggle-slider"></div>
+          </div>
+        </div>
       </div>
-      <div class="sound-toggle">
-        <span class="sound-label">🔊 Sound notifications</span>
-        <div class="mini-toggle" id="soundToggle">
-          <div class="mini-toggle-slider"></div>
+
+      <!-- Custom Workouts Card -->
+      <div class="settings-card">
+        <div class="card-header">
+          <span class="card-icon">💪</span>
+          <h2 class="card-title">Custom Workouts</h2>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="customWorkout">Add New Workout</label>
+          <div class="form-row">
+            <input 
+              type="text" 
+              id="customWorkout" 
+              class="form-input" 
+              placeholder="e.g., Do 20 push-ups"
+              maxlength="100"
+            >
+            <button class="btn btn-secondary" id="addWorkout">
+              <span>➕</span>
+              Add
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Your Custom Workouts</label>
+          <div class="workout-list" id="workoutList">
+            <!-- Custom workouts will be dynamically added here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics Card -->
+      <div class="settings-card">
+        <div class="card-header">
+          <span class="card-icon">📊</span>
+          <h2 class="card-title">Your Progress</h2>
+        </div>
+        
+        <div class="stats-grid-options">
+          <div class="stat-card">
+            <div class="stat-value" id="currentStreak">0</div>
+            <div class="stat-title">Current Streak</div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-value" id="totalCompleted">0</div>
+            <div class="stat-title">Workouts Completed</div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-value" id="totalRemindersStats">0</div>
+            <div class="stat-title">Total Reminders</div>
+          </div>
+          
+        </div>
+
+        <div class="form-group" style="margin-top: var(--spacing-lg);">
+          <div class="form-row">
+            <button class="btn btn-secondary" id="resetStats">
+              <span>🔄</span>
+              Reset Stats
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme Settings Card -->
+      <div class="settings-card">
+        <div class="card-header">
+          <span class="card-icon">🎨</span>
+          <h2 class="card-title">Appearance</h2>
+        </div>
+        
+        <div class="toggle-row">
+          <span class="toggle-label">🌙 Dark Mode</span>
+          <div class="toggle-switch" id="darkModeToggle">
+            <div class="toggle-slider"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Theme Preview</label>
+          <div class="theme-preview" id="themePreview">
+            <div class="preview-card">
+              <div class="preview-header">Workout Reminder</div>
+              <div class="preview-content">
+                <div class="preview-streak">🔥 5 days</div>
+                <div class="preview-toggle active"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- About Card -->
+      <div class="settings-card">
+        <div class="card-header">
+          <span class="card-icon">ℹ️</span>
+          <h2 class="card-title">About</h2>
+        </div>
+        
+        <div class="about-content">
+          <p><strong>Workout Reminder</strong> v1.0</p>
+          <p>Stay active and healthy with regular workout reminders throughout your day.</p>
+          
+          <div class="form-group" style="margin-top: var(--spacing-lg);">
+            <div class="form-row">
+              <button class="btn btn-secondary" id="viewHelp">
+                <span>❓</span>
+                Help
+              </button>
+              <button class="btn btn-secondary" id="reportIssue">
+                <span>🐛</span>
+                Report Issue
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    
-    <div class="settings-section">
-      <div class="section-title">Custom Workouts</div>
-      <div class="input-group">
-        <input type="text" id="customWorkout" class="input-field" placeholder="Add your own workout...">
+
+    <!-- Success Toast -->
+    <div class="toast" id="successToast">
+      <div class="toast-content">
+        <span class="toast-icon">✅</span>
+        <span class="toast-message">Settings saved successfully!</span>
       </div>
-      <button class="button" id="addWorkout">Add Workout</button>
-      <div class="workout-list" id="workoutList"></div>
     </div>
-    
-    <button class="button primary" id="saveOptions">Save Options</button>
   </div>
 
   <script src="options.js"></script>
