@@ -1,8 +1,8 @@
-# 🏋️‍♀️ Up & Move Chrome Extension
+# ⚡Up & Move Chrome Extension
 
 ## 📋 Overview
 
-The **Up & Move Chrome Extension** helps users stay active and healthy throughout their day by providing timely movement reminders. It's highly customizable, allowing users to set their preferred reminder intervals, add custom workouts, and track progress — all within a clean, modern UI.
+Because you weren’t built to sit still, **Up & Move** is a free Chrome Extension helps users who spend the day sitting on their desk to stay active and healthy throughout their day by providing timely movement reminders. It's highly customizable, allowing users to set their preferred reminder intervals, add custom workouts, and track progress — all within a clean, modern UI.
 
 ---
 
