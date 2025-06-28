@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadSettings() {
     try {
-      const result = await chrome.storage.sync.get([
+      const result = await chrome.storage.local.get([
         "interval", 
         "soundEnabled",
         "customWorkouts",
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadStats() {
     try {
-      const result = await chrome.storage.sync.get([
+      const result = await chrome.storage.local.get([
         "streak", 
         "completedWorkouts", 
         "totalReminders",
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Show loading state
       saveOptionsButton.classList.add("loading");
       
-      await chrome.storage.sync.set({ interval: interval });
+      await chrome.storage.local.set({ interval: interval });
       
       // Send message to background script to update alarm
     
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const newState = !isActive;
       
       soundToggle.classList.toggle("active", newState);
-      await chrome.storage.sync.set({ soundEnabled: newState });
+      await chrome.storage.local.set({ soundEnabled: newState });
       
       showToast(`Sound notifications ${newState ? 'enabled' : 'disabled'}`);
       
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.toggle("dark-mode", newDarkMode);
       darkModeToggle.classList.toggle("active", newDarkMode);
       
-      await chrome.storage.sync.set({ darkMode: newDarkMode });
+      await chrome.storage.local.set({ darkMode: newDarkMode });
       
       showToast(`${newDarkMode ? 'Dark' : 'Light'} mode enabled`);
       
@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     try {
-      const result = await chrome.storage.sync.get(["customWorkouts"]);
+      const result = await chrome.storage.local.get(["customWorkouts"]);
       const customWorkouts = result.customWorkouts || [];
       
       if (customWorkouts.includes(workoutText)) {
@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       
       customWorkouts.push(workoutText);
-      await chrome.storage.sync.set({ customWorkouts: customWorkouts });
+      await chrome.storage.local.set({ customWorkouts: customWorkouts });
       
       loadCustomWorkouts(customWorkouts);
       customWorkoutInput.value = "";
@@ -295,14 +295,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function removeCustomWorkout(index) {
     try {
-      const result = await chrome.storage.sync.get(["customWorkouts"]);
+      const result = await chrome.storage.local.get(["customWorkouts"]);
       const customWorkouts = result.customWorkouts || [];
       
       if (index >= 0 && index < customWorkouts.length) {
         const removedWorkout = customWorkouts[index];
         customWorkouts.splice(index, 1);
         
-        await chrome.storage.sync.set({ customWorkouts: customWorkouts });
+        await chrome.storage.local.set({ customWorkouts: customWorkouts });
         loadCustomWorkouts(customWorkouts);
         
         showToast(`"${removedWorkout}" removed`);
@@ -320,7 +320,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     try {
-      await chrome.storage.sync.set({
+      await chrome.storage.local.set({
         streak: 0,
         completedWorkouts: 0,
         totalReminders: 0,

@@ -1,13 +1,13 @@
 export default class WorkoutStorage {
   static async get(keys) {
     return new Promise((resolve) => {
-      chrome.storage.sync.get(keys, resolve);
+      chrome.storage.local.get(keys, resolve);
     });
   }
 
   static async set(data) {
     return new Promise((resolve) => {
-      chrome.storage.sync.set(data, resolve);
+      chrome.storage.local.set(data, resolve);
     });
   }
 

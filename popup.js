@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadSettings() {
     try {
-      const result = await chrome.storage.sync.get(["enabled", "darkMode"]);
+      const result = await chrome.storage.local.get(["enabled", "darkMode"]);
       
       // Set toggle state
       const enabled = result.enabled !== false; // Default to enabled
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadStats() {
     try {
-      const result = await chrome.storage.sync.get([
+      const result = await chrome.storage.local.get([
         "streak", 
         "completedWorkouts", 
         "totalReminders"
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
       enableToggle.classList.toggle("active", newState);
       
       // Save state
-      await chrome.storage.sync.set({ enabled: newState });
+      await chrome.storage.local.set({ enabled: newState });
       
       // Send message to background script
       chrome.runtime.sendMessage({ 
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
       darkModeToggle.querySelector(".theme-icon").textContent = newDarkMode ? "☀️" : "🌙";
       
       // Save preference
-      await chrome.storage.sync.set({ darkMode: newDarkMode });
+      await chrome.storage.local.set({ darkMode: newDarkMode });
       
       // Visual feedback
       darkModeToggle.style.transform = "rotate(180deg)";
