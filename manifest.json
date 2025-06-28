@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Up & Move",
   "version": "1.0",
-  "description": "helps users stay active and healthy throughout their day by providing timely movement reminders.",
+  "description": "Helps users who spend the day sitting on their desk to stay active and healthy throughout their day by providing timely movement reminders.",
   "permissions": [
     "alarms",
     "notifications",
