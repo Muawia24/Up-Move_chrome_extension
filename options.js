@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function validateInterval() {
     const interval = parseInt(intervalInput.value);
-    const isValid = interval >= 1 && interval <= 480;
+    const isValid = interval >= 5 && interval <= 480;
     
     intervalInput.classList.toggle("error", !isValid);
     intervalInput.classList.toggle("success", isValid);

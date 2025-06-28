@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Workout Reminder Assistant",
+  "name": "Up & Move",
   "version": "1.0",
-  "description": "Reminds users to take short workout breaks throughout the day.",
+  "description": "helps users stay active and healthy throughout their day by providing timely movement reminders.",
   "permissions": [
     "alarms",
     "notifications",
