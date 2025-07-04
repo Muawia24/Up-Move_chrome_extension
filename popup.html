@@ -23,50 +23,51 @@
         </button>
       </div>
     </header>
-
-    <!-- Streak Display Section -->
-    <section class="streak-section">
-      <div class="streak-card">
-        <div class="streak-content">
-          <div class="streak-icon">🔥</div>
-          <div class="streak-info">
-            <span class="streak-label">Current Streak</span>
-            <span class="streak-count" id="streakCount">0 days</span>
+    <!-- Scrollable Content Area -->
+    <div class="popup-scrollable">
+      <!-- Streak Display Section -->
+      <section class="streak-section">
+        <div class="streak-card">
+          <div class="streak-content">
+            <div class="streak-icon">🔥</div>
+            <div class="streak-info">
+              <span class="streak-label">Current Streak</span>
+              <span class="streak-count" id="streakCount">0 days</span>
+            </div>
+          </div>
+          <div class="streak-message" id="streakMessage">
+            Keep it up! You're doing great!
           </div>
         </div>
-        <div class="streak-message" id="streakMessage">
-          Keep it up! You're doing great!
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Controls Section -->
-    <section class="controls-section">
-      <div class="control-item">
-        <div class="control-info">
-          <span class="control-label">Workout Reminders</span>
-          <span class="control-description">Get notified to stay active</span>
+      <!-- Controls Section -->
+      <section class="controls-section">
+        <div class="control-item">
+          <div class="control-info">
+            <span class="control-label">Workout Reminders</span>
+            <span class="control-description">Get notified to stay active</span>
+          </div>
+          <div class="toggle-switch" id="enableToggle">
+            <div class="toggle-slider"></div>
+          </div>
         </div>
-        <div class="toggle-switch" id="enableToggle">
-          <div class="toggle-slider"></div>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Quick Stats -->
-    <section class="stats-section">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <span class="stat-number" id="completedWorkouts">0</span>
-          <span class="stat-label">Completed</span>
+      <!-- Quick Stats -->
+      <section class="stats-section">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-number" id="completedWorkouts">0</span>
+            <span class="stat-label">Completed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="totalReminders">0</span>
+            <span class="stat-label">Reminders</span>
+          </div>
         </div>
-        <div class="stat-item">
-          <span class="stat-number" id="totalReminders">0</span>
-          <span class="stat-label">Reminders</span>
-        </div>
-      </div>
-    </section>
-
+      </section>
+    </div>
     <!-- Footer -->
     <footer class="popup-footer">
       <button class="options-button" id="openOptions">
